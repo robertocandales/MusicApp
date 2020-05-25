@@ -1,5 +1,4 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/jsx-no-undef */
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -8,8 +7,22 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import HomeScreen from './screens/HomeScreen';
 import MusicScreen from './screens/Music/MusicScreen';
-import AudienceScreen from './screens/AudienceScreen';
+import AudienceScreen from './screens/Audience/AudienceScreen';
 import AccountScreen from './screens/AccountScreen';
+import ShowPerfil from './screens/Music/SubComponents/ShowPerfil';
+import {createStackNavigator} from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+const createHomeStack = () => (
+  <Stack.Navigator
+    initialRouteName="MusicScreen"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="Music" component={MusicScreen} />
+    <Stack.Screen name="ShowPerfil" component={ShowPerfil} />
+  </Stack.Navigator>
+);
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -33,7 +46,7 @@ const App: () => React$Node = () => {
         />
         <Tab.Screen
           name="Music"
-          component={MusicScreen}
+          component={createHomeStack}
           options={{
             tabBarLabel: 'Music',
             tabBarIcon: ({color}) => (

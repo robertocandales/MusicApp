@@ -1,21 +1,19 @@
-/* eslint-disable react-native/no-inline-styles */
-
 import React from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 
-const AccountScreen = () => {
+const Followers = () => {
   return (
     <ScrollView style={styles.main}>
       <View style={styles.container}>
         <Text style={{fontSize: 20, color: '#eeeeee', marginTop: 15}}>
-          Accaount
+          Followers
         </Text>
       </View>
     </ScrollView>
   );
 };
 
-export default AccountScreen;
+export default Followers;
 
 const styles = StyleSheet.create({
   main: {

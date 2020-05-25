@@ -71,9 +71,32 @@ const PlaylistScreen = () => {
       views: '2m',
     },
   ];
+
+  const [time1, settime1] = React.useState('Ultimos 28 dias');
+  const time = timeSelected => {
+    settime1(timeSelected);
+    console.log(timeSelected);
+  };
+  const containerPar = {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 5,
+  };
+  const containerImPar = {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor: '#282828',
+  };
   return (
     <View>
-      <ButtonDropDown />
+      <ButtonDropDown timeSelected={time} />
       <View
         style={{
           flex: 1,
@@ -82,12 +105,14 @@ const PlaylistScreen = () => {
           alignItems: 'center',
           marginBottom: 30,
         }}>
-        <Text style={{fontSize: 20, color: '#eeeeee'}}>1.3k</Text>
-        <Text style={{fontSize: 20, color: '#eeeeee'}}>1.3k</Text>
+        <Text style={{fontSize: 16, color: '#535353'}}>{time1}</Text>
+        <Text style={{fontSize: 16, color: '#535353'}}>STREAMS</Text>
       </View>
 
       {songs.map((song, index) => (
-        <TouchableOpacity style={styles.container2} key={index}>
+        <TouchableOpacity
+          style={index % 2 ? containerPar : containerImPar}
+          key={index}>
           <View
             style={{
               flex: 1,
@@ -102,13 +127,13 @@ const PlaylistScreen = () => {
               style={{width: 50, height: 50}}
             />
             <View>
-            <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
-              {song.name}
-            </Text>
+              <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
+                {song.name}
+              </Text>
 
-            <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
-              {song.song}
-            </Text>
+              <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
+                {song.song}
+              </Text>
             </View>
           </View>
           <View

@@ -8,17 +8,22 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Avatar} from 'react-native-elements';
-import SongsScreen from './SongsScreen';
-import PlaylistScreen from './PlaylistScreen';
+import Songs from './Songs';
+import Streams from './Streams';
+import Followers from './Followers';
 
-const MusicScreen = ({navigation}) => {
-  const [enableComponent, setEnableComponent] = React.useState(true);
+const AudienceScreen = () => {
+  const [enableComponent, setEnableComponent] = React.useState(1);
   const songs = () => {
-    setEnableComponent(true);
+    setEnableComponent(1);
   };
   const playlists = () => {
-    setEnableComponent(false);
+    setEnableComponent(2);
   };
+  const followers = () => {
+    setEnableComponent(3);
+  };
+
   const styleButtomEnable = {
     color: '#eeeeee',
     fontSize: 20,
@@ -35,7 +40,7 @@ const MusicScreen = ({navigation}) => {
   return (
     <ScrollView style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.music}>Music</Text>
+        <Text style={styles.music}>Audience</Text>
         <Avatar
           rounded
           source={{
@@ -50,34 +55,52 @@ const MusicScreen = ({navigation}) => {
           }
         />
       </View>
+      <View style={{padding: 20}}>
+        <Text style={{color: '#eeeeee', fontSize: 20}}>1.475 listener</Text>
+        <Text style={{color: '#535353', fontSize: 15}}>Last 28 days</Text>
+      </View>
       <View>
         <View style={styles.container1}>
           <TouchableOpacity onPress={songs}>
             <Text
-              style={enableComponent ? styleButtomEnable : styleButtomDesable}>
+              style={
+                enableComponent === 1 ? styleButtomEnable : styleButtomDesable
+              }>
               Songs
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={playlists}>
             <Text
-              style={enableComponent ? styleButtomDesable : styleButtomEnable}>
-              Playlist
+              style={
+                enableComponent === 2 ? styleButtomEnable : styleButtomDesable
+              }>
+              Streams
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={followers}>
+            <Text
+              style={
+                enableComponent === 3 ? styleButtomEnable : styleButtomDesable
+              }>
+              Followers
             </Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={{padding: 20, marginTop: -10}}>
-        {enableComponent ? (
-          <SongsScreen navigation={navigation} />
-        ) : (
-          <PlaylistScreen />
-        )}
+        {enableComponent === 1 ? (
+          <Songs />
+        ) : enableComponent === 2 ? (
+          <Streams />
+        ) : enableComponent === 3 ? (
+          <Followers />
+        ) : null}
       </View>
     </ScrollView>
   );
 };
 
-export default MusicScreen;
+export default AudienceScreen;
 
 const styles = StyleSheet.create({
   main: {
@@ -97,8 +120,8 @@ const styles = StyleSheet.create({
   container1: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-start',
-
+    alignItems: 'center',
+    justifyContent: 'space-around',
     padding: 20,
   },
 });
