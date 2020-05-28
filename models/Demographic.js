@@ -1,7 +1,5 @@
 class Demographic {
-    constructor() {
-        
-    }
+  constructor() {}
 }
 
 export default Demographic;

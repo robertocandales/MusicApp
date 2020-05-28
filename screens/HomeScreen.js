@@ -1,5 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
 import {
   StyleSheet,
   Text,
@@ -8,9 +10,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Avatar, Image} from 'react-native-elements';
+import {SET_ARTIST, SET_ARTIST_NAME} from '../store/redux/actions/types';
+import {get_songs} from '../store/redux/actions/artist.actions';
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+  let {artist, isLoading} = useSelector(state => state.artist);
+  //  console.log(artist);
+  console.log(isLoading);
+  const {songs} = artist;
+  //  console.log(songs);
+
   const seeSong = () => {};
+  const urlDynamicStyle = {flex: 1, flexDirection: 'row', marginTop: 15};
+
   return (
     <ScrollView style={styles.main}>
       <View style={styles.container}>
@@ -35,128 +48,87 @@ const HomeScreen = () => {
         </View>
         <Text style={styles.people}>... 0 people listening now</Text>
       </View>
-
       <View />
-      <View style={styles.container1}>
-        <Text style={styles.topSong}>Your top songs</Text>
-        <Text style={styles.days1}>LAST 7 DAYS</Text>
-        <View>
-          <View style={{flex: 1, flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={{
-                uri:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRPdy0QM980qConLIwShaAhxENLEQ97RBxHwfOWb_hXzY390OPt&usqp=CAU',
-              }}
-              style={{width: 120, height: 120}}
-            />
-            <View style={{marginLeft: 10}}>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>01</Text>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>Tomorrowland</Text>
-              <Text style={{fontSize: 15, color: '#eeeeee'}}>337 Streams</Text>
-            </View>
-          </View>
-          <View style={{flex: 1, flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={{
-                uri:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSvtFdEpd3Tj_h0N6A-Rs4uvRrOPzKGu4CYm6cq8UOEby3_GBAe&usqp=CAU',
-              }}
-              style={{width: 100, height: 100}}
-            />
-            <View style={{marginLeft: 10}}>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>02</Text>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>
-                By the moment
-              </Text>
-              <Text style={{fontSize: 15, color: '#eeeeee'}}>637 Streams</Text>
-            </View>
-          </View>
-          <View style={{flex: 1, flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={{
-                uri: 'https://i.ytimg.com/vi/nNe4RUHpLWI/maxresdefault.jpg',
-              }}
-              style={{width: 80, height: 80}}
-            />
-            <View style={{marginLeft: 10}}>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>03</Text>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>Europe Fest</Text>
-              <Text style={{fontSize: 15, color: '#eeeeee'}}>37 Streams</Text>
-            </View>
-          </View>
-          <TouchableOpacity onPress={seeSong}>
-            <Text style={{color: '#eeeeee', marginBottom: 30}}>SEE SONGS</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
+      {/*nuevo*/}
       <View style={styles.container1}>
         <Text style={styles.topSong}>Your top playlist</Text>
         <Text style={styles.days1}>LAST 7 DAYS</Text>
-        <View>
-          <View style={{flex: 1, flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={{
-                uri:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTTZ6AxZMqSqTNHLquYh4EC73QLcQ-ZbO2ZZaPD3J4o11sXq0AV&usqp=CAU',
-              }}
-              style={{width: 120, height: 120}}
-            />
-            <View style={{marginLeft: 10}}>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>01</Text>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>
-                Ultra 4k Miami
-              </Text>
-              <Text style={{fontSize: 15, color: '#eeeeee'}}>337 Streams</Text>
-            </View>
-          </View>
-          <View style={{flex: 1, flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={{
-                uri:
-                  'https://static.iris.net.co/arcadia/upload/images/2020/4/27/81463_1.jpg',
-              }}
-              style={{width: 100, height: 100}}
-            />
-            <View style={{marginLeft: 10}}>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>02</Text>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>
-                By the moment
-              </Text>
-              <Text style={{fontSize: 15, color: '#eeeeee'}}>637 Streams</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              marginTop: 15,
-              marginBottom: 15,
-            }}>
-            <Image
-              source={{
-                uri:
-                  'https://pm1.narvii.com/6207/cc7c7301b9d58d70a812a12f008ed158575462dd_hq.jpg',
-              }}
-              style={{width: 80, height: 80}}
-            />
-            <View style={{marginLeft: 10}}>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>03</Text>
-              <Text style={{fontSize: 20, color: '#eeeeee'}}>Canserbero</Text>
-              <Text style={{fontSize: 15, color: '#eeeeee'}}>3796 Streams</Text>
-            </View>
-          </View>
-          <TouchableOpacity onPress={seeSong}>
-            <Text style={{color: '#eeeeee', marginBottom: 30}}>
-              SEE PLAYLIST
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
-
+      {isLoading ? (
+        <Text>Loadding</Text>
+      ) : (
+        songs.map((song, index) => (
+          <TouchableOpacity style={styles.container1} key={index}>
+            <View>
+              <View style={{flex: 1, flexDirection: 'row', marginTop: 5}}>
+                <Image
+                  source={{
+                    uri: song.image_url,
+                  }}
+                  style={
+                    index === 0
+                      ? {width: 120, height: 120}
+                      : {width: 120 - 10 * index, height: -10 * index}
+                  }
+                />
+                <View style={{marginLeft: 10}}>
+                  <Text style={{fontSize: 20, color: '#eeeeee'}}>
+                    {song.artists}
+                  </Text>
+                  <Text style={{fontSize: 18, color: '#eeeeee'}}>
+                    {song.song_name}
+                  </Text>
+                  <Text style={{fontSize: 16, color: '#eeeeee'}}>
+                    {song.album}
+                  </Text>
+                  <Text style={{fontSize: 14, color: '#eeeeee'}}>
+                    {song.total_plays_number} Streams
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))
+      )}
       <View style={styles.container1}>
         <Text style={styles.topSong}>New for you</Text>
       </View>
+      {isLoading ? (
+        <Text>Loadding</Text>
+      ) : (
+        songs.map((song, index) => (
+          <TouchableOpacity style={styles.container1} key={index}>
+            <View>
+              <View style={{flex: 1, flexDirection: 'row', marginTop: 5}}>
+                <Image
+                  source={{
+                    uri: song.image_url,
+                  }}
+                  style={
+                    index === 0
+                      ? {width: 120, height: 120}
+                      : {width: 120 - 10 * index, height: -10 * index}
+                  }
+                />
+                <View style={{marginLeft: 10}}>
+                  <Text style={{fontSize: 20, color: '#eeeeee'}}>
+                    {song.artists}
+                  </Text>
+                  <Text style={{fontSize: 18, color: '#eeeeee'}}>
+                    {song.song_name}
+                  </Text>
+                  <Text style={{fontSize: 16, color: '#eeeeee'}}>
+                    {song.album}
+                  </Text>
+                  <Text style={{fontSize: 14, color: '#eeeeee'}}>
+                    {song.total_plays_number} Streams
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))
+      )}
     </ScrollView>
   );
 };

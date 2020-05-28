@@ -2,7 +2,6 @@
  * This will be the wrapper class to hold on all the fetched information
  */
 export default class Artist {
-
   constructor(name, songs = [], demographics = {}, image = null) {
     this.name = name;
     this.image = image; // profile picture
