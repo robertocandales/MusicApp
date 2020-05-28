@@ -2,7 +2,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-
 import Chart from './SubComponents/Chart';
 import CircularChart from './SubComponents/CircularChart';
 import ListenerAlsoLike from './SubComponents/ListenerAlsoLike';

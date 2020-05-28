@@ -22,7 +22,6 @@ const HomeScreen = () => {
   //  console.log(songs);
 
   const seeSong = () => {};
-  const urlDynamicStyle = {flex: 1, flexDirection: 'row', marginTop: 15};
 
   return (
     <ScrollView style={styles.main}>

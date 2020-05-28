@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect} from 'react';
+
 import {
   StyleSheet,
   Text,
@@ -10,12 +11,21 @@ import {
 import {Image} from 'react-native-elements';
 import Chart from './../../Audience/SubComponents/Chart';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {demographicAction} from './../../../store/redux/actions/demographicAction';
 
 const ShowPerfil = ({route, navigation}) => {
   //  console.log({navigation});
-  const {photo, name, views} = route.params;
-  console.log(name);
-
+  const {demographic, loadding} = useSelector(state => state.demographic);
+  console.log(demographic);
+  const dispatch = useDispatch();
+  //  console.log(demographic);
+  //  console.log(loadding);
+  const {photo, name, views, time} = route.params;
+  //  console.log(name);
+  useEffect(() => {
+    dispatch(demographicAction());
+  }, [dispatch]);
   const data = [
     {
       time: 'Last 24 hours',
@@ -85,7 +95,7 @@ const ShowPerfil = ({route, navigation}) => {
           {views} streams
         </Text>
         <Text style={{fontSize: 15, color: '#535353', marginTop: 1}}>
-          All Times
+          {time}
         </Text>
       </View>
       <Chart />
@@ -160,6 +170,56 @@ const ShowPerfil = ({route, navigation}) => {
           </View>
         </View>
       ))}
+      <View style={styles.container}>
+        <View style={{marginTop: 20}}>
+          <Text style={{color: '#eeeeee', fontSize: 20}}>
+            Top country for this song
+          </Text>
+          <Text style={{color: '#535353', fontSize: 15}}>{time}</Text>
+        </View>
+      </View>
+      {loadding ? (
+        <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
+          cargando
+        </Text>
+      ) : (
+        demographic.data.report.data.map((dat, index) => (
+          <View style={index % 2 ? containerPar : containerImPar} key={index}>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
+                {index + 1}
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  flex: 1,
+                  fontSize: 15,
+                  color: '#eeeeee',
+                  marginRight: 35,
+                  alignItems: 'flex-end',
+                }}>
+                {dat.country}
+              </Text>
+              <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
+                200
+              </Text>
+            </View>
+          </View>
+        ))
+      )}
     </ScrollView>
   );
 };

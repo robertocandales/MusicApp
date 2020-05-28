@@ -7,7 +7,6 @@ import {parse_data} from '../../../models/Song'; //todo: try the async method
  *
  * @returns {Function}
  */ export const get_songs = query_params => (dispatch, getState) => {
-     console.log(query_params)
   return songs_service
     .get_songs(query_params)
     .then(songs => {
