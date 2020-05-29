@@ -31,7 +31,7 @@ function parse_data(data) {
         value.total_events,
         null,
         value.artists,
-        'https://static2.claromusica.com/fotos/1831165.jpg',
+        'https://agenciaajn.com/new/wp-content/uploads/sia.jpg',
       ),
   );
 }

@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-
 import {
   StyleSheet,
   Text,
@@ -10,16 +9,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Avatar, Image} from 'react-native-elements';
-import {SET_ARTIST, SET_ARTIST_NAME} from '../store/redux/actions/types';
 import {get_songs} from '../store/redux/actions/artist.actions';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  let {artist, isLoading} = useSelector(state => state.artist);
-  //  console.log(artist);
-  console.log(isLoading);
+  const {artist, isLoading} = useSelector(state => state.artist);
   const {songs} = artist;
+  //  console.log(artist);
+  //  console.log(isLoading);
   //  console.log(songs);
+  React.useEffect(() => {
+    dispatch(get_songs({user: artist.name, top: 5}));
+  }, [dispatch]);
 
   const seeSong = () => {};
 

@@ -7,6 +7,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {Image} from 'react-native-elements';
 import Chart from './../../Audience/SubComponents/Chart';
@@ -17,37 +18,19 @@ import {demographicAction} from './../../../store/redux/actions/demographicActio
 const ShowPerfil = ({route, navigation}) => {
   //  console.log({navigation});
   const {demographic, loadding} = useSelector(state => state.demographic);
+  const {artist} = useSelector(state => state.artist);
+  //  console.log(artist.name);
+
   console.log(demographic);
   const dispatch = useDispatch();
-  //  console.log(demographic);
+  console.log(demographic);
   //  console.log(loadding);
   const {photo, name, views, time} = route.params;
   //  console.log(name);
   useEffect(() => {
-    dispatch(demographicAction());
+    dispatch(demographicAction({user: artist.name}));
   }, [dispatch]);
-  const data = [
-    {
-      time: 'Last 24 hours',
-      streams: '100',
-      saves: '1',
-    },
-    {
-      time: 'Last 48 hours',
-      streams: '200',
-      saves: '10',
-    },
-    {
-      time: 'Last 7 days',
-      streams: '500',
-      saves: '100',
-    },
-    {
-      time: 'Last month',
-      streams: '1000',
-      saves: '245',
-    },
-  ];
+
   const containerPar = {
     flex: 1,
     flexDirection: 'row',
@@ -134,42 +117,7 @@ const ShowPerfil = ({route, navigation}) => {
           </Text>
         </View>
       </View>
-      {data.map((dat, index) => (
-        <View style={index % 2 ? containerPar : containerImPar} key={index}>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
-              {dat.time}
-            </Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                flex: 1,
-                fontSize: 15,
-                color: '#eeeeee',
-                marginRight: 35,
-                alignItems: 'flex-end',
-              }}>
-              {dat.streams}
-            </Text>
-            <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
-              {dat.time}
-            </Text>
-          </View>
-        </View>
-      ))}
+
       <View style={styles.container}>
         <View style={{marginTop: 20}}>
           <Text style={{color: '#eeeeee', fontSize: 20}}>
@@ -179,11 +127,11 @@ const ShowPerfil = ({route, navigation}) => {
         </View>
       </View>
       {loadding ? (
-        <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
-          cargando
-        </Text>
+        <View style={[styles.container2, styles.horizontal]}>
+          <ActivityIndicator size="large" color="#eeeeee" />
+        </View>
       ) : (
-        demographic.data.report.data.map((dat, index) => (
+        demographic.report.data.map((dat, index) => (
           <View style={index % 2 ? containerPar : containerImPar} key={index}>
             <View
               style={{
@@ -246,5 +194,14 @@ const styles = StyleSheet.create({
     paddingRight: 10,
 
     textAlign: 'center',
+  },
+  container2: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
   },
 });

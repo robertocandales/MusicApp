@@ -25,7 +25,7 @@ const AccountScreen = () => {
 
   let {artist} = useSelector(state => state.artist); // get the variable from the store
   let {songs} = artist;
-  console.log(artist);
+  //  console.log(artist);
 
   const dispatch = useDispatch(); // maybe it would be better to import the reference of this called function in all the places we want tp dispatch actions
 

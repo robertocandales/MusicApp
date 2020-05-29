@@ -5,8 +5,8 @@ import {
 } from '../actions/types.js';
 
 const initialState = {
-  demographic: [],
-  loadding: false,
+  demographic: [], // initial value
+  loadding: true,
 };
 export default function itemsReducer(state = initialState, action) {
   //  console.log(state);

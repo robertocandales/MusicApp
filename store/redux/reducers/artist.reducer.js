@@ -15,6 +15,8 @@ const initialState = {
 };
 
 const artistReducer = (state = initialState, action) => {
+  //  console.log(`state ${state.artist}`);
+  //  console.log(`action ${action.payloada}`);
   switch (action.type) {
     case SET_SONGS:
       state.artist.songs = action.payload;
