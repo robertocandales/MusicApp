@@ -2,6 +2,9 @@ import {
   DEMOGRAPHIC_FETCHING,
   DEMOGRAPHIC_FETCHED,
   DEMOGRAPHIC_FETCH_FAILED,
+  ARTISTS_FETCHED,
+  ARTISTS_FETCHING,
+  ARTISTS_FETCH_FAILED,
 } from './types.js';
 import {demographic_service} from './../../../services/demographic.service';
 

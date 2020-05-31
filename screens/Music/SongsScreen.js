@@ -1,21 +1,32 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Button} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import ButtonDropDown from './SubComponents/ButtonDropDown';
 import {Image} from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {get_songs} from './../../store/redux/actions/artist.actions';
 
 const SongsScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+
   //  console.log({navigation});
   const {artist, isLoading} = useSelector(state => state.artist);
-  //  console.log(artist);
-
+  //  console.log('artist en song', artist);
   const [time1, settime1] = useState('Ultimos 28 dias');
   const time = timeSelected => {
     settime1(timeSelected);
     console.log(timeSelected);
   };
+  //  React.useEffect(() => {
+  //    dispatch(get_songs({user: artist.name, top: 5}));
+  //  }, [dispatch]);
   const containerPar = {
     flex: 1,
     flexDirection: 'row',
@@ -50,9 +61,11 @@ const SongsScreen = ({navigation}) => {
       </View>
 
       {isLoading ? (
-        <Text>Loadding</Text>
+        <View style={[styles.container2, styles.horizontal]}>
+          <ActivityIndicator size="large" color="#eeeeee" />
+        </View>
       ) : (
-        artist.songs.map((song, index) => (
+        artist.map((song, index) => (
           <TouchableOpacity
             style={index % 2 ? containerPar : containerImPar}
             key={index}
@@ -108,17 +121,14 @@ const SongsScreen = ({navigation}) => {
 
 export default SongsScreen;
 
-//const styles = StyleSheet.create({
-//  container2: {
-//    flex: 1,
-//    flexDirection: 'row',
-//    justifyContent: 'space-between',
-//    alignItems: 'center',
-//    marginTop: 10,
-//    marginBottom: 10,
-//  },
-//  music: {
-//    color: '#eeeeee',
-//    fontSize: 20,
-//  },
-//});
+const styles = StyleSheet.create({
+  container2: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
+});

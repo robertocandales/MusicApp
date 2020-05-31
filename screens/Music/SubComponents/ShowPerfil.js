@@ -19,16 +19,15 @@ const ShowPerfil = ({route, navigation}) => {
   //  console.log({navigation});
   const {demographic, loadding} = useSelector(state => state.demographic);
   const {artist} = useSelector(state => state.artist);
-  //  console.log(artist.name);
+  //  console.log('datos showPerfil', artist[0].artists);
 
-  console.log(demographic);
+  console.log('datos demographic', demographic);
   const dispatch = useDispatch();
   console.log(demographic);
-  //  console.log(loadding);
   const {photo, name, views, time} = route.params;
   //  console.log(name);
   useEffect(() => {
-    dispatch(demographicAction({user: artist.name}));
+    dispatch(demographicAction({user: artist[0].artists}));
   }, [dispatch]);
 
   const containerPar = {

@@ -1,7 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import ButtonDropDown from './SubComponents/ButtonDropDown';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import {Image} from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
@@ -47,9 +53,11 @@ const PlaylistScreen = () => {
       </View>
 
       {isLoading ? (
-        <Text>Loadding</Text>
+        <View style={[styles.container3, styles.horizontal]}>
+          <ActivityIndicator size="large" color="#eeeeee" />
+        </View>
       ) : (
-        artist.songs.map((song, index) => (
+        artist.map((song, index) => (
           <TouchableOpacity
             style={index % 2 ? containerPar : containerImPar}
             key={index}>
@@ -113,5 +121,14 @@ const styles = StyleSheet.create({
   music: {
     color: '#eeeeee',
     fontSize: 20,
+  },
+  container3: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
   },
 });

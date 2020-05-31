@@ -7,6 +7,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {Avatar, Image} from 'react-native-elements';
 import {get_songs} from '../store/redux/actions/artist.actions';
@@ -14,8 +15,8 @@ import {get_songs} from '../store/redux/actions/artist.actions';
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const {artist, isLoading} = useSelector(state => state.artist);
-  const {songs} = artist;
-  //  console.log(artist);
+  //  const {songs} = artist;
+  console.log(artist);
   //  console.log(isLoading);
   //  console.log(songs);
   React.useEffect(() => {
@@ -55,36 +56,47 @@ const HomeScreen = () => {
         <Text style={styles.days1}>LAST 7 DAYS</Text>
       </View>
       {isLoading ? (
-        <Text>Loadding</Text>
+        <View style={[styles.container2, styles.horizontal]}>
+          <ActivityIndicator size="large" color="#eeeeee" />
+        </View>
       ) : (
-        songs.map((song, index) => (
-          <TouchableOpacity style={styles.container1} key={index}>
-            <View>
-              <View style={{flex: 1, flexDirection: 'row', marginTop: 5}}>
-                <Image
-                  source={{
-                    uri: song.image_url,
-                  }}
-                  style={
-                    index === 0
-                      ? {width: 120, height: 120}
-                      : {width: 120 - 10 * index, height: -10 * index}
-                  }
-                />
-                <View style={{marginLeft: 10}}>
-                  <Text style={{fontSize: 20, color: '#eeeeee'}}>
-                    {song.artists}
-                  </Text>
-                  <Text style={{fontSize: 18, color: '#eeeeee'}}>
-                    {song.song_name}
-                  </Text>
-                  <Text style={{fontSize: 16, color: '#eeeeee'}}>
-                    {song.album}
-                  </Text>
-                  <Text style={{fontSize: 14, color: '#eeeeee'}}>
-                    {song.total_plays_number} Streams
-                  </Text>
-                </View>
+        artist.map((song, index) => (
+          <TouchableOpacity style={styles.container3} key={index}>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                marginTop: 5,
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}>
+              <Image
+                source={{
+                  uri: song.image_url,
+                }}
+                style={
+                  index === 0
+                    ? {width: 120, height: 120}
+                    : {width: 120 - 10 * index, height: 120 - 10 * index}
+                }
+              />
+              <View
+                style={{
+                  flex: 1,
+                  marginLeft: 10,
+                }}>
+                <Text style={{fontSize: 20, color: '#eeeeee'}}>
+                  {song.artists}
+                </Text>
+                <Text style={{fontSize: 18, color: '#eeeeee'}}>
+                  {song.song_name}
+                </Text>
+                <Text style={{fontSize: 16, color: '#eeeeee'}}>
+                  {song.album}
+                </Text>
+                <Text style={{fontSize: 14, color: '#eeeeee'}}>
+                  {song.total_plays_number} Streams
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -94,36 +106,47 @@ const HomeScreen = () => {
         <Text style={styles.topSong}>New for you</Text>
       </View>
       {isLoading ? (
-        <Text>Loadding</Text>
+        <View style={[styles.container2, styles.horizontal]}>
+          <ActivityIndicator size="large" color="#eeeeee" />
+        </View>
       ) : (
-        songs.map((song, index) => (
-          <TouchableOpacity style={styles.container1} key={index}>
-            <View>
-              <View style={{flex: 1, flexDirection: 'row', marginTop: 5}}>
-                <Image
-                  source={{
-                    uri: song.image_url,
-                  }}
-                  style={
-                    index === 0
-                      ? {width: 120, height: 120}
-                      : {width: 120 - 10 * index, height: -10 * index}
-                  }
-                />
-                <View style={{marginLeft: 10}}>
-                  <Text style={{fontSize: 20, color: '#eeeeee'}}>
-                    {song.artists}
-                  </Text>
-                  <Text style={{fontSize: 18, color: '#eeeeee'}}>
-                    {song.song_name}
-                  </Text>
-                  <Text style={{fontSize: 16, color: '#eeeeee'}}>
-                    {song.album}
-                  </Text>
-                  <Text style={{fontSize: 14, color: '#eeeeee'}}>
-                    {song.total_plays_number} Streams
-                  </Text>
-                </View>
+        artist.map((song, index) => (
+          <TouchableOpacity style={styles.container3} key={index}>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                marginTop: 5,
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}>
+              <Image
+                source={{
+                  uri: song.image_url,
+                }}
+                style={
+                  index === 0
+                    ? {width: 120, height: 120}
+                    : {width: 120 - 10 * index, height: 120 - 10 * index}
+                }
+              />
+              <View
+                style={{
+                  flex: 1,
+                  marginLeft: 10,
+                }}>
+                <Text style={{fontSize: 20, color: '#eeeeee'}}>
+                  {song.artists}
+                </Text>
+                <Text style={{fontSize: 18, color: '#eeeeee'}}>
+                  {song.song_name}
+                </Text>
+                <Text style={{fontSize: 16, color: '#eeeeee'}}>
+                  {song.album}
+                </Text>
+                <Text style={{fontSize: 14, color: '#eeeeee'}}>
+                  {song.total_plays_number} Streams
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -182,7 +205,6 @@ const styles = StyleSheet.create({
   container1: {
     flex: 1,
     padding: 20,
-
     paddingTop: 10,
     alignItems: 'flex-start',
     justifyContent: 'space-between',
@@ -194,5 +216,21 @@ const styles = StyleSheet.create({
   days1: {
     paddingTop: 10,
     color: '#535353',
+  },
+  container2: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
+  container3: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 10,
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
   },
 });
