@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {LineChart} from 'react-native-chart-kit';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 
 const Chart = () => {
   return (
@@ -16,9 +16,9 @@ const Chart = () => {
           ],
         }}
         height={200}
-        width={390}
+        width={Dimensions.get('window').width} // from react-native
         //yAxisLabel="$"
-        yAxisSuffix="k"
+        yAxisSuffix='k'
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           //  backgroundColor: 'white',
@@ -46,6 +46,8 @@ const Chart = () => {
         style={{
           borderRadius: 16,
           fontSize: 20,
+
+          //  marginLeft: -15,
         }}
       />
     </View>

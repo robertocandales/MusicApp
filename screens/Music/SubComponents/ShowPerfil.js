@@ -66,7 +66,10 @@ const ShowPerfil = ({ route, navigation }) => {
         <Text style={{ fontSize: 15, color: '#eeeeee', marginTop: 1 }}>{views} streams</Text>
         <Text style={{ fontSize: 15, color: '#535353', marginTop: 1 }}>{time}</Text>
       </View>
-      <Chart />
+      <View style={styles.container3}>
+        <Chart />
+      </View>
+
       <Text
         style={{
           fontSize: 20,
@@ -171,6 +174,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
+
+    textAlign: 'center',
+  },
+  container3: {
+    flex: 1,
+    alignItems: 'flex-start',
+    marginLeft: -15,
+    //paddingLeft: 10,
+    //paddingRight: 10,
 
     textAlign: 'center',
   },
