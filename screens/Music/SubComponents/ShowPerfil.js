@@ -16,19 +16,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { demographicAction } from './../../../store/redux/actions/demographicAction';
 
 const ShowPerfil = ({ route, navigation }) => {
-  //  console.log({navigation});
-  const { demographic, loadding } = useSelector((state) => state.demographic);
-  const { artist } = useSelector((state) => state.artist);
-  console.log('datos showPerfil', artist[0].artists);
 
-  console.log('datos demographic', demographic);
+  const { artist } = useSelector((state) => state.artist);
+  const { isLoading } = useSelector((state) => state.demographic);
+  const { demographics } = artist;
+
+  console.log('datos demographics', demographics);
   const dispatch = useDispatch();
-  console.log(demographic);
+
   const { photo, name, views, time } = route.params;
   //  console.log(name);
   useEffect(() => {
-    dispatch(demographicAction({ user: artist[0].artists }));
-  }, [dispatch]);
+    dispatch(demographicAction({ user: artist.name }));
+  }, []);
 
   const containerPar = {
     flex: 1,
@@ -108,12 +108,12 @@ const ShowPerfil = ({ route, navigation }) => {
           <Text style={{ color: '#535353', fontSize: 15 }}>{time}</Text>
         </View>
       </View>
-      {/*{loadding ? (
+      {/*{isLoading ? (
         <View style={[styles.container2, styles.horizontal]}>
           <ActivityIndicator size="large" color="#eeeeee" />
         </View>
       ) : (
-        demographic.report.data.map((dat, index) => (
+        demographics.report.data.map((dat, index) => (
           <View style={index % 2 ? containerPar : containerImPar} key={index}>
             <View
               style={{

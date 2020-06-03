@@ -12,25 +12,26 @@ import {
 import {SET_ARTIST, SET_ARTIST_NAME} from '../store/redux/actions/types';
 import {get_songs, set_artist} from '../store/redux/actions/artist.actions';
 import Autocomplete from 'react-native-autocomplete-input';
+import Artist from "../models/Artist";
 //import Artist from '../models/Artist';
 
 const AccountScreen = () => {
   const artists = [
-    'Hans Zimmer',
-    'Justin bieber',
-    'Sebastian Yatra',
-    'Canserbero',
-    'Hillsong',
-    'Alicia Keys',
-    'Rammstein',
-    'sia',
-    'Fisher',
-    'Tiesto',
-    'Metallica',
-    'Ludwig van Beethoven',
-    'Drake',
-    'Daft Punk',
-    'Linkin Park',
+    new Artist('Hans Zimmer'),
+    new Artist('Justin bieber'),
+    new Artist('Sebastian Yatra'),
+    new Artist('Canserbero'),
+    new Artist('Hillsong'),
+    new Artist('Alicia Keys'),
+    new Artist('Rammstein'),
+    new Artist('sia'),
+    new Artist('Fisher'),
+    new Artist('Tiesto'),
+    new Artist('Metallica'),
+    new Artist('Ludwig van Beethoven'),
+    new Artist('Drake'),
+    new Artist('Daft Punk'),
+    new Artist('Linkin Park'),
   ];
   const dispatch = useDispatch();
   // test function... to see if we retrieve different artists data.
@@ -44,8 +45,8 @@ const AccountScreen = () => {
   //  let {artist} = useSelector(state => state.artist); // get the variable from the store
   //  let {songs} = artist;
   //  console.log('account artist', artist);
-  const selectArtist = singer => {
-    dispatch(set_artist({user: singer, top: 5}));
+  const selectArtist = _artist => {
+    dispatch(set_artist(_artist));
   };
   const containerPar = {
     flex: 1,
@@ -67,7 +68,7 @@ const AccountScreen = () => {
 
   const [query, setQuery] = React.useState('');
   console.log(query);
-  const data = artists;
+
   const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
   return (
     <View style={styles.main}>
@@ -98,7 +99,7 @@ const AccountScreen = () => {
                       color: '#eeeeee',
                       marginTop: 0,
                     }}>
-                    {artist1}
+                    {artist1.name}
                   </Text>
                 </TouchableOpacity>
               </View>

@@ -5,20 +5,17 @@ import {
 } from '../actions/types.js';
 
 const initialState = {
-  demographic: [], // initial value
-  loadding: true,
+  isLoading: true,
 };
+
 export default function itemsReducer(state = initialState, action) {
-  //  console.log(state);
-  //  console.log(action.type);
-  //  console.log(action.payload);
   switch (action.type) {
     case DEMOGRAPHIC_FETCHING:
-      return {...state, loadding: true};
+      return {...state, isLoading: true};
     case DEMOGRAPHIC_FETCHED:
-      return {...state, loadding: false, demographic: action.payload};
+      return {...state, isLoading: false};
     case DEMOGRAPHIC_FETCH_FAILED:
-      return {...state, loadding: false, error: action.payload};
+      return {...state, isLoading: false, error: action.payload};
 
     default:
       return state;

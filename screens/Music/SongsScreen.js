@@ -65,7 +65,7 @@ const SongsScreen = ({navigation}) => {
           <ActivityIndicator size="large" color="#eeeeee" />
         </View>
       ) : (
-        artist.map((song, index) => (
+        artist.songs.map((song, index) => (
           <TouchableOpacity
             style={index % 2 ? containerPar : containerImPar}
             key={index}
