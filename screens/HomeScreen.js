@@ -16,10 +16,8 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const { artist, isLoading } = useSelector((state) => state.artist);
   const songs = artist.songs;
-  console.log(JSON.stringify(songs, null, 4));
 
-  //  console.log(isLoading);
-  //  console.log(songs);
+    
   React.useEffect(() => {
     dispatch(get_songs({ user: artist.name, top: 5 }));
   }, []);

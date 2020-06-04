@@ -1,17 +1,17 @@
 import {
-  FETCHING_DATA_SUCCESS,
-  SET_SONGS,
-  SET_ARTIST,
+    FETCHING_DATA_SUCCESS,
+    SET_SONGS,
+    SET_ARTIST,
 } from './types';
 import { songs_service } from '../../../services/songs.service';
 import { returnErrors } from './messages';
 import { parse_data } from '../../../models/Song';
 import Artist from "../../../models/Artist";
+import {demographicAction} from "./demographicAction";
 
 /**
  *
  * @returns {Function}
-
  */
  export const get_songs = query_params => (dispatch, getState) => {
  return songs_service
@@ -31,12 +31,12 @@ import Artist from "../../../models/Artist";
 };
 
 /**
- *
+ * If you set a new artist, fetches all the needed data.
  * @param artist: Must be a Artist instance
  * @returns {Function}
  */
 export const set_artist = (artist) => (dispatch, getState) => {
-    console.log('songs size: ' + artist.songs.length);
+    console.log('songs size: ' + JSON.stringify(artist, null, 4));
     if (!(artist instanceof Artist)) return;
 
 
@@ -49,7 +49,7 @@ export const set_artist = (artist) => (dispatch, getState) => {
         dispatch(get_songs({user: artist.name, top: 5}));
 
 
-    if (!artist.demographics)
-        ; // get_demographics()
+    if (!artist.demographics.data.length)
+        dispatch(demographicAction({user: artist.name, top: 5}));
 
 };

@@ -1,3 +1,5 @@
+import Demographic from "./Demographic";
+
 class Song {
   constructor(
     song_name,
@@ -13,7 +15,18 @@ class Song {
     this.unique_play_number = unique_play_number;
     this.image_url = image_url;
     this.artists = artists;
+    this.demographic = null;
   }
+
+  /**
+   *
+   * @param {Demographic} demographics
+   */
+  set_demographics(demographics) {
+    if (demographics instanceof Demographic)
+      this.demographics = demographics;
+  }
+
 }
 
 /**

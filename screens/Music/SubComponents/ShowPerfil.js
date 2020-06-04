@@ -19,15 +19,16 @@ const ShowPerfil = ({ route, navigation }) => {
 
   const { artist } = useSelector((state) => state.artist);
   const { isLoading } = useSelector((state) => state.demographic);
-  const { demographics } = artist;
+  let { demographics } = artist;
 
-  console.log('datos demographics', demographics);
   const dispatch = useDispatch();
 
   const { photo, name, views, time } = route.params;
-  //  console.log(name);
+
   useEffect(() => {
-    dispatch(demographicAction({ user: artist.name }));
+      // TODO: you can load the demographic by song but we need to storage that data on the Song instance..
+      if (!artist.demographics.data.length)
+          dispatch(demographicAction({ user: artist.name /*, song: name */}));
   }, []);
 
   const containerPar = {
@@ -88,7 +89,7 @@ const ShowPerfil = ({ route, navigation }) => {
             justifyContent: 'flex-start',
             alignItems: 'center',
           }}>
-          <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }} />
+            <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }} > </Text>
         </View>
         <View
           style={{
@@ -108,12 +109,12 @@ const ShowPerfil = ({ route, navigation }) => {
           <Text style={{ color: '#535353', fontSize: 15 }}>{time}</Text>
         </View>
       </View>
-      {/*{isLoading ? (
+      {isLoading ? (
         <View style={[styles.container2, styles.horizontal]}>
           <ActivityIndicator size="large" color="#eeeeee" />
         </View>
       ) : (
-        demographics.report.data.map((dat, index) => (
+        demographics.data.map((dat, index) => (
           <View style={index % 2 ? containerPar : containerImPar} key={index}>
             <View
               style={{
@@ -144,12 +145,63 @@ const ShowPerfil = ({ route, navigation }) => {
                 {dat.country}
               </Text>
               <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
-                200
+                {dat.total_plays}
               </Text>
             </View>
           </View>
         ))
-      )}*/}
+      )}
+
+        <View style={styles.container}>
+            <View style={{ marginTop: 20 }}>
+                <Text style={{ color: '#eeeeee', fontSize: 20 }}>Top cities for this song</Text>
+                <Text style={{ color: '#535353', fontSize: 15 }}>{time}</Text>
+            </View>
+        </View>
+        {isLoading ? (
+            <View style={[styles.container2, styles.horizontal]}>
+                <ActivityIndicator size="large" color="#eeeeee" />
+            </View>
+        ) : (
+            demographics.data.map((dat, i) => dat.cities.map((item, index) => (
+                <View style={index % 2 ? containerPar : containerImPar} key={index}>
+                    <View
+                        style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'flex-start',
+                            alignItems: 'center',
+                        }}>
+                        <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
+                            {index + 1}
+                        </Text>
+                    </View>
+                    <View
+                        style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'flex-end',
+                            alignItems: 'center',
+                        }}>
+                        <Text
+                            style={{
+                                flex: 1,
+                                fontSize: 15,
+                                color: '#eeeeee',
+                                marginRight: 35,
+                                alignItems: 'flex-end',
+                            }}>
+                            {item.city}
+                        </Text>
+                        <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
+                            {item.total_plays}
+                        </Text>
+                    </View>
+                </View>
+            )))
+        )}
+
+
     </ScrollView>
   );
 };

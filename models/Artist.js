@@ -1,12 +1,15 @@
+import Demographic from "./Demographic";
+
 /**
  * This will be the wrapper class to hold on all the fetched information
  */
 export default class Artist {
-  constructor(name, songs = [], demographics = {}, image = null) {
+
+  constructor(name, songs = [], demographics = new Demographic(), image = null) {
     this.name = name;
     this.image = image; // profile picture
     this.songs = songs; // songs is meant to be an array of Song model class instances
-    this.demographics = demographics; // demographics is meant to be an object of Demographic model class instance
+    this.set_demographics(demographics); // demographics is meant to be an object of Demographic model class instance
   }
 
   /**
@@ -22,6 +25,8 @@ export default class Artist {
    * @param {Demographic} demographics
    */
   set_demographics(demographics) {
-    if (demographics) this.demographics = demographics;
+    if (demographics instanceof Demographic)
+      this.demographics = demographics;
   }
+
 }
