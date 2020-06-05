@@ -14,21 +14,24 @@ import Chart from './../../Audience/SubComponents/Chart';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import { demographicAction } from './../../../store/redux/actions/demographicAction';
+import {song_demographic_action} from "../../../store/redux/actions/demographicAction";
 
 const ShowPerfil = ({ route, navigation }) => {
 
   const { artist } = useSelector((state) => state.artist);
   const { isLoading } = useSelector((state) => state.demographic);
-  let { demographics } = artist;
+  //let { demographics } = artist;
 
   const dispatch = useDispatch();
 
-  const { photo, name, views, time } = route.params;
+  const { photo, name, views, time, song } = route.params;
+
+  let { demographics } = song;
 
   useEffect(() => {
-      // TODO: you can load the demographic by song but we need to storage that data on the Song instance..
-      if (!artist.demographics.data.length)
-          dispatch(demographicAction({ user: artist.name /*, song: name */}));
+      if (!song.demographics.data.length)
+          //dispatch(demographicAction({ user: artist.name , song: song.name }));
+          dispatch(song_demographic_action({ user: artist.name , song: song.song_name }, song));
   }, []);
 
   const containerPar = {

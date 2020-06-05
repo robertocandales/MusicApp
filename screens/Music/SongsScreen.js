@@ -76,6 +76,7 @@ const SongsScreen = ({navigation}) => {
                 name: song.song_name,
                 views: song.total_plays_number,
                 time: time1,
+                song: song
               })
             }>
             <View

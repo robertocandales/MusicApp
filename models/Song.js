@@ -8,14 +8,15 @@ class Song {
     unique_play_number,
     artists,
     image_url = null,
+    demographics = new Demographic()
   ) {
     this.song_name = song_name;
     this.album = album;
     this.total_plays_number = total_plays_number;
-    this.unique_play_number = unique_play_number;
+    this.unique_plays_number = unique_play_number;
     this.image_url = image_url;
     this.artists = artists;
-    this.demographic = null;
+    this.demographics = demographics;
   }
 
   /**

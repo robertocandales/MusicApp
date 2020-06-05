@@ -3,10 +3,11 @@ import {
     SET_SONGS,
     SET_ARTIST,
     SET_ARTIST_NAME,
-    FETCHING_DATA_FAILURE, SET_ARTIST_DEMOGRAPHICS,
+    FETCHING_DATA_FAILURE, SET_ARTIST_DEMOGRAPHICS, SET_SONG_DEMOGRAPHICS,
 } from '../actions/types';
 import Artist from '../../../models/Artist';
 import Demographic from "../../../models/Demographic";
+import Song from "../../../models/Song";
 
 let artist = new Artist('Justin Bieber'); // default artist
 
@@ -43,6 +44,22 @@ const artistReducer = (state = initialState, action) => {
             return {
                 ...state,
             };
+        case SET_SONG_DEMOGRAPHICS:
+            // payload must have: { song: data, demographics: data }
+            if (action.payload.song instanceof Song) {
+
+                const { song, demographics } = action.payload;
+
+                // search the song reference
+                const song_objects = state.artist.songs.filter(_song => song.song_name === _song.song_name);
+
+                // set the demographic data in the found song
+                for (let i = 0; i < song_objects.length; i++)
+                    song_objects[i].demographics.set_data(demographics);
+            }
+
+            return {...state};
+
         case FETCHING_DATA_SUCCESS:
             return {
                 ...state,

@@ -4,14 +4,11 @@
 class Demographic {
 
   constructor(data = []) {
-      this.data = data;
+      this.set_data(data);
   }
 
   set_data(data) {
-      console.log('DATA: ' + JSON.stringify(this.data, null, 2));
       this.data = this._process_data(data);
-      console.log('DATA 2');
-
   }
 
   _process_data(data) {
