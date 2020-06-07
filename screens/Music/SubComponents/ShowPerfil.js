@@ -14,24 +14,23 @@ import Chart from './../../Audience/SubComponents/Chart';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import { demographicAction } from './../../../store/redux/actions/demographicAction';
-import {song_demographic_action} from "../../../store/redux/actions/demographicAction";
+import { song_demographic_action } from '../../../store/redux/actions/demographicAction';
 
 const ShowPerfil = ({ route, navigation }) => {
-
   const { artist } = useSelector((state) => state.artist);
   const { isLoading } = useSelector((state) => state.demographic);
   //let { demographics } = artist;
-
+  console.log(artist);
   const dispatch = useDispatch();
 
   const { photo, name, views, time, song } = route.params;
 
   let { demographics } = song;
-
+  console.log(demographics.data);
   useEffect(() => {
-      if (!song.demographics.data.length)
-          //dispatch(demographicAction({ user: artist.name , song: song.name }));
-          dispatch(song_demographic_action({ user: artist.name , song: song.song_name }, song));
+    if (!song.demographics.data.length)
+      //dispatch(demographicAction({ user: artist.name , song: song.name }));
+      dispatch(song_demographic_action({ user: artist.name, song: song.song_name }, song));
   }, []);
 
   const containerPar = {
@@ -92,7 +91,7 @@ const ShowPerfil = ({ route, navigation }) => {
             justifyContent: 'flex-start',
             alignItems: 'center',
           }}>
-            <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }} > </Text>
+          <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}> </Text>
         </View>
         <View
           style={{
@@ -112,13 +111,15 @@ const ShowPerfil = ({ route, navigation }) => {
           <Text style={{ color: '#535353', fontSize: 15 }}>{time}</Text>
         </View>
       </View>
+      
       {isLoading ? (
         <View style={[styles.container2, styles.horizontal]}>
-          <ActivityIndicator size="large" color="#eeeeee" />
+          <ActivityIndicator size='large' color='#eeeeee' />
         </View>
       ) : (
         demographics.data.map((dat, index) => (
           <View style={index % 2 ? containerPar : containerImPar} key={index}>
+          
             <View
               style={{
                 flex: 1,
@@ -126,8 +127,16 @@ const ShowPerfil = ({ route, navigation }) => {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
-                {index + 1}
+              <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>{index + 1}</Text>
+              <Text
+                style={{
+                  flex: 1,
+                  fontSize: 15,
+                  color: '#eeeeee',
+                  marginLeft: 25,
+                  alignItems: 'flex-end',
+                }}>
+                {dat.country}
               </Text>
             </View>
             <View
@@ -137,17 +146,7 @@ const ShowPerfil = ({ route, navigation }) => {
                 justifyContent: 'flex-end',
                 alignItems: 'center',
               }}>
-              <Text
-                style={{
-                  flex: 1,
-                  fontSize: 15,
-                  color: '#eeeeee',
-                  marginRight: 35,
-                  alignItems: 'flex-end',
-                }}>
-                {dat.country}
-              </Text>
-              <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
+              <Text style={{ fontSize: 15, color: '#eeeeee', marginRight: 15 }}>
                 {dat.total_plays}
               </Text>
             </View>
@@ -155,56 +154,54 @@ const ShowPerfil = ({ route, navigation }) => {
         ))
       )}
 
-        <View style={styles.container}>
-            <View style={{ marginTop: 20 }}>
-                <Text style={{ color: '#eeeeee', fontSize: 20 }}>Top cities for this song</Text>
-                <Text style={{ color: '#535353', fontSize: 15 }}>{time}</Text>
-            </View>
+      <View style={styles.container}>
+        <View style={{ marginTop: 20 }}>
+          <Text style={{ color: '#eeeeee', fontSize: 20 }}>Top cities for this song</Text>
+          <Text style={{ color: '#535353', fontSize: 15 }}>{time}</Text>
         </View>
-        {isLoading ? (
-            <View style={[styles.container2, styles.horizontal]}>
-                <ActivityIndicator size="large" color="#eeeeee" />
+      </View>
+      {isLoading ? (
+        <View style={[styles.container2, styles.horizontal]}>
+          <ActivityIndicator size='large' color='#eeeeee' />
+        </View>
+      ) : (
+        demographics.data.map((dat, i) =>
+          dat.cities.map((item, index) => (
+            <View style={index % 2 ? containerPar : containerImPar} key={index}>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                }}>
+                <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>{index + 1}</Text>
+                <Text
+                  style={{
+                    flex: 1,
+                    fontSize: 15,
+                    color: '#eeeeee',
+                    marginLeft: 25,
+                    alignItems: 'flex-start',
+                  }}>
+                  {item.city}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                }}>
+                <Text style={{ fontSize: 15, color: '#eeeeee', marginRight: 15 }}>
+                  {item.total_plays}
+                </Text>
+              </View>
             </View>
-        ) : (
-            demographics.data.map((dat, i) => dat.cities.map((item, index) => (
-                <View style={index % 2 ? containerPar : containerImPar} key={index}>
-                    <View
-                        style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-start',
-                            alignItems: 'center',
-                        }}>
-                        <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
-                            {index + 1}
-                        </Text>
-                    </View>
-                    <View
-                        style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            alignItems: 'center',
-                        }}>
-                        <Text
-                            style={{
-                                flex: 1,
-                                fontSize: 15,
-                                color: '#eeeeee',
-                                marginRight: 35,
-                                alignItems: 'flex-end',
-                            }}>
-                            {item.city}
-                        </Text>
-                        <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
-                            {item.total_plays}
-                        </Text>
-                    </View>
-                </View>
-            )))
-        )}
-
-
+          )),
+        )
+      )}
     </ScrollView>
   );
 };

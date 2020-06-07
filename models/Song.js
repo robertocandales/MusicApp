@@ -1,4 +1,4 @@
-import Demographic from "./Demographic";
+import Demographic from './Demographic';
 
 class Song {
   constructor(
@@ -8,7 +8,7 @@ class Song {
     unique_play_number,
     artists,
     image_url = null,
-    demographics = new Demographic()
+    demographics = new Demographic(),
   ) {
     this.song_name = song_name;
     this.album = album;
@@ -24,10 +24,8 @@ class Song {
    * @param {Demographic} demographics
    */
   set_demographics(demographics) {
-    if (demographics instanceof Demographic)
-      this.demographics = demographics;
+    if (demographics instanceof Demographic) this.demographics = demographics;
   }
-
 }
 
 /**
@@ -52,4 +50,4 @@ function parse_data(data) {
 
 export default Song;
 
-export {parse_data};
+export { parse_data };

@@ -1,24 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useState } from 'react';
 import ButtonDropDown from './SubComponents/ButtonDropDown';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
-import {Image} from 'react-native-elements';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Image } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const PlaylistScreen = () => {
-  const {artist, isLoading} = useSelector(state => state.artist);
+  const { artist, isLoading } = useSelector((state) => state.artist);
 
-  const [time1, settime1] = React.useState('Ultimos 28 dias');
-  const time = timeSelected => {
+  const [time1, settime1] = useState('Ultimos 28 dias');
+  const time = (timeSelected) => {
     settime1(timeSelected);
-    console.log(timeSelected);
   };
   const containerPar = {
     flex: 1,
@@ -48,19 +41,17 @@ const PlaylistScreen = () => {
           alignItems: 'center',
           marginBottom: 30,
         }}>
-        <Text style={{fontSize: 16, color: '#535353'}}>{time1}</Text>
-        <Text style={{fontSize: 16, color: '#535353'}}>STREAMS</Text>
+        <Text style={{ fontSize: 16, color: '#535353' }}>{time1}</Text>
+        <Text style={{ fontSize: 16, color: '#535353' }}>STREAMS</Text>
       </View>
 
       {isLoading ? (
         <View style={[styles.container3, styles.horizontal]}>
-          <ActivityIndicator size="large" color="#eeeeee" />
+          <ActivityIndicator size='large' color='#eeeeee' />
         </View>
       ) : (
-        artist.map((song, index) => (
-          <TouchableOpacity
-            style={index % 2 ? containerPar : containerImPar}
-            key={index}>
+        artist.songs.map((song, index) => (
+          <TouchableOpacity style={index % 2 ? containerPar : containerImPar} key={index}>
             <View
               style={{
                 flex: 1,
@@ -72,16 +63,14 @@ const PlaylistScreen = () => {
                 source={{
                   uri: song.image_url,
                 }}
-                style={{width: 50, height: 50}}
+                style={{ width: 50, height: 50 }}
               />
               <View>
-                <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
+                <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>
                   {song.song_name}
                 </Text>
 
-                <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
-                  {song.album}
-                </Text>
+                <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>{song.album}</Text>
               </View>
             </View>
             <View
@@ -91,14 +80,10 @@ const PlaylistScreen = () => {
                 justifyContent: 'flex-end',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
+              <Text style={{ fontSize: 15, color: '#eeeeee', marginRight: 15 }}>
                 {song.total_plays_number}
               </Text>
-              <MaterialCommunityIcons
-                name="chevron-right"
-                color="#535353"
-                size={30}
-              />
+              <MaterialCommunityIcons name='chevron-right' color='#535353' size={30} />
             </View>
           </TouchableOpacity>
         ))
