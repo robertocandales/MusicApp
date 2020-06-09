@@ -32,8 +32,9 @@ const HomeScreen = () => {
             uri: avatar,
           }}
           containerStyle={{
+            marginTop: 10,
             alignSelf: 'flex-end',
-            marginRight: 15,
+            marginRight: 0,
           }}
         />
 

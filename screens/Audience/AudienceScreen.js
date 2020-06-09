@@ -1,13 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
-import {Avatar} from 'react-native-elements';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-elements';
 import Songs from './Songs';
 import Streams from './Streams';
 import Followers from './Followers';
@@ -44,8 +38,7 @@ const AudienceScreen = () => {
         <Avatar
           rounded
           source={{
-            uri:
-              'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+            uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
           }}
           containerStyle={
             {
@@ -55,39 +48,30 @@ const AudienceScreen = () => {
           }
         />
       </View>
-      <View style={{padding: 20}}>
-        <Text style={{color: '#eeeeee', fontSize: 20}}>1.475 listener</Text>
-        <Text style={{color: '#535353', fontSize: 15}}>Last 28 days</Text>
+      <View style={{ padding: 20 }}>
+        <Text style={{ color: '#eeeeee', fontSize: 20 }}>1.475 listener</Text>
+        <Text style={{ color: '#535353', fontSize: 15 }}>Last 28 days</Text>
       </View>
       <View>
         <View style={styles.container1}>
           <TouchableOpacity onPress={songs}>
-            <Text
-              style={
-                enableComponent === 1 ? styleButtomEnable : styleButtomDesable
-              }>
+            <Text style={enableComponent === 1 ? styleButtomEnable : styleButtomDesable}>
               Songs
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={playlists}>
-            <Text
-              style={
-                enableComponent === 2 ? styleButtomEnable : styleButtomDesable
-              }>
+            <Text style={enableComponent === 2 ? styleButtomEnable : styleButtomDesable}>
               Streams
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={followers}>
-            <Text
-              style={
-                enableComponent === 3 ? styleButtomEnable : styleButtomDesable
-              }>
+            <Text style={enableComponent === 3 ? styleButtomEnable : styleButtomDesable}>
               Followers
             </Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{padding: 20, marginTop: -10}}>
+      <View style={{ padding: 20, marginTop: -10 }}>
         {enableComponent === 1 ? (
           <Songs />
         ) : enableComponent === 2 ? (
@@ -112,6 +96,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     padding: 20,
+    marginTop: 20,
   },
   music: {
     color: '#eeeeee',

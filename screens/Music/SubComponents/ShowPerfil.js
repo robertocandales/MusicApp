@@ -111,7 +111,7 @@ const ShowPerfil = ({ route, navigation }) => {
           <Text style={{ color: '#535353', fontSize: 15 }}>{time}</Text>
         </View>
       </View>
-      
+
       {isLoading ? (
         <View style={[styles.container2, styles.horizontal]}>
           <ActivityIndicator size='large' color='#eeeeee' />
@@ -119,7 +119,6 @@ const ShowPerfil = ({ route, navigation }) => {
       ) : (
         demographics.data.map((dat, index) => (
           <View style={index % 2 ? containerPar : containerImPar} key={index}>
-          
             <View
               style={{
                 flex: 1,
@@ -220,6 +219,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 10,
+    marginTop: 20,
   },
   container1: {
     flex: 1,

@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     padding: 20,
+    marginTop: 20,
   },
   music: {
     color: '#eeeeee',
