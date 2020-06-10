@@ -17,6 +17,23 @@ import { demographicAction } from './../../../store/redux/actions/demographicAct
 import { song_demographic_action } from '../../../store/redux/actions/demographicAction';
 
 const ShowPerfil = ({ route, navigation }) => {
+  const streasmAndSaves = [
+    {
+      time: 'last 24 hours',
+      streams: 10,
+      saves: 5,
+    },
+    {
+      time: 'last 7 days',
+      streams: 20,
+      saves: 15,
+    },
+    {
+      time: 'last 24 days',
+      streams: 30,
+      saves: 25,
+    },
+  ];
   const { artist } = useSelector((state) => state.artist);
   const { isLoading } = useSelector((state) => state.demographic);
   //let { demographics } = artist;
@@ -38,16 +55,16 @@ const ShowPerfil = ({ route, navigation }) => {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
+    //marginTop: 5,
+    //marginBottom: 5,
   };
   const containerImPar = {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
+    //marginTop: 5,
+    //marginBottom: 5,
     backgroundColor: '#282828',
   };
   return (
@@ -99,10 +116,51 @@ const ShowPerfil = ({ route, navigation }) => {
             flexDirection: 'row',
             justifyContent: 'flex-end',
             alignItems: 'center',
+            padding: 10,
           }}>
-          <Text style={{ fontSize: 15, color: '#eeeeee', marginRight: 105 }}>Streams</Text>
-          <Text style={{ fontSize: 15, color: '#eeeeee', marginRight: 15 }}>Saves</Text>
+          <Text style={{ textAlign: 'center', flex: 1, fontSize: 15, color: '#eeeeee' }}></Text>
+          <Text style={{ textAlign: 'right', flex: 1, fontSize: 15, color: '#eeeeee' }}>
+            streams
+          </Text>
+          <Text
+            style={{
+              textAlign: 'right',
+              flex: 1,
+              fontSize: 15,
+              color: '#eeeeee',
+            }}>
+            saves
+          </Text>
         </View>
+        {streasmAndSaves.map((data, index) => (
+          <View style={index % 2 ? containerPar : containerImPar} key={index}>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                textAlign: 'center',
+                padding: 10,
+              }}>
+              <Text style={{ textAlign: 'left', flex: 1, fontSize: 15, color: '#eeeeee' }}>
+                {data.time}
+              </Text>
+              <Text style={{ textAlign: 'right', flex: 1, fontSize: 15, color: '#eeeeee' }}>
+                {data.streams}
+              </Text>
+              <Text
+                style={{
+                  textAlign: 'right',
+                  flex: 1,
+                  fontSize: 15,
+                  color: '#eeeeee',
+                }}>
+                {data.saves}
+              </Text>
+            </View>
+          </View>
+        ))}
       </View>
 
       <View style={styles.container}>
@@ -125,6 +183,7 @@ const ShowPerfil = ({ route, navigation }) => {
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
+                padding: 10,
               }}>
               <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>{index + 1}</Text>
               <Text
@@ -173,6 +232,7 @@ const ShowPerfil = ({ route, navigation }) => {
                   flexDirection: 'row',
                   justifyContent: 'flex-start',
                   alignItems: 'center',
+                  padding: 10,
                 }}>
                 <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>{index + 1}</Text>
                 <Text
