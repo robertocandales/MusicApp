@@ -223,8 +223,8 @@ const ShowPerfil = ({ route, navigation }) => {
           <ActivityIndicator size='large' color='#eeeeee' />
         </View>
       ) : (
-        demographics.data.map((dat, i) =>
-          dat.cities.map((item, index) => (
+        demographics.get_top_cities().map((item, index) =>
+         (
             <View style={index % 2 ? containerPar : containerImPar} key={index}>
               <View
                 style={{
@@ -258,7 +258,7 @@ const ShowPerfil = ({ route, navigation }) => {
                 </Text>
               </View>
             </View>
-          )),
+          ),
         )
       )}
     </ScrollView>

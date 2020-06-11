@@ -45,6 +45,27 @@ class Demographic {
       return data;
   }
 
+
+    /**
+     * Gets the cities of each country and sorts them by total_plays property in descendent way.
+     * @returns {any[]}
+     */
+    get_top_cities() {
+        return this.data.map(item => item.cities)
+            .flat()
+            .sort(this._compare);
+    }
+
+    _compare( a, b ) {
+        if ( a.total_plays < b.total_plays ){
+            return 1;
+        }
+        if ( a.total_plays > b.total_plays ){
+            return -1;
+        }
+        return 0;
+    }
+
 }
 
 /*
