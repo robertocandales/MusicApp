@@ -10,7 +10,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Avatar, Image } from 'react-native-elements';
-import { get_songs } from '../store/redux/actions/artist.actions';
+import { get_songs, set_artist } from '../store/redux/actions/artist.actions';
+import Artist from "../models/Artist";
 
 const HomeScreen = () => {
   const avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
@@ -18,7 +19,8 @@ const HomeScreen = () => {
   const { artist, isLoading } = useSelector((state) => state.artist);
   const songs = artist.songs;
   React.useEffect(() => {
-    dispatch(get_songs({ user: artist.name, top: 5 }));
+    //dispatch(get_songs({ user: artist.name, top: 5 }));
+    dispatch(set_artist(new Artist('John Mayer')));
   }, []);
 
   const seeSong = () => {};

@@ -3,32 +3,24 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
-const CircularChart = () => {
-  const male = {
-    name: 'Male',
-    porcentaje: '65',
-  };
-  const female = {
-    name: 'Female',
-    porcentaje: '35',
-  };
-  console.log(parseInt('100', 10));
+const CircularChart = (props) => {
+  const { gender_data, names } = props;
 
   return (
     <View style={styles.container1}>
       <AnimatedCircularProgress
         size={200}
         width={10}
-        fill={parseInt(male.porcentaje, 10)}
+        fill={parseInt(gender_data.male, 10)}
         tintColor="#00e0ff"
         backgroundColor="#3d5875">
         {fill => (
           <View>
             <Text style={{color: '#00e0ff', fontSize: 20}}>
-              {male.porcentaje}% {male.name}
+              {gender_data.male}% {names[0]}
             </Text>
             <Text style={{color: '#3d5875', fontSize: 20}}>
-              {female.porcentaje}% {female.name}
+              {gender_data.female}% {names[1]}
             </Text>
           </View>
         )}

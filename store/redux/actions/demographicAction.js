@@ -12,7 +12,7 @@ export const demographicAction = (query_params) => async (dispatch, getState) =>
 
     dispatch({
       type: SET_ARTIST_DEMOGRAPHICS,
-      payload: result.report.data,
+      payload: result.report,
     });
 
     dispatch({
@@ -41,7 +41,7 @@ export const song_demographic_action = (query_params, song_instance, update = fa
     const result = await demographic_service.get_demographics(query_params);
     dispatch({
       type: SET_SONG_DEMOGRAPHICS,
-      payload: { song: song_instance, demographics: result.report.data },
+      payload: { song: song_instance, demographics: result.report },
     });
 
     dispatch({

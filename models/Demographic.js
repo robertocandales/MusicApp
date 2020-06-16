@@ -8,10 +8,18 @@ class Demographic {
   }
 
   set_data(data) {
-      this.data = this._process_data(data);
+      this.data = this._process_data(data.data ? data.data : data);
+      this.set_gender_totals();
+  }
+
+  set_total(total) {
+      this.total = total ? total : 0;
   }
 
   _process_data(data) {
+
+      if (!data)
+          return;
 
       // helper inner function
       function set_totals(item, key, total_hold_object) {
@@ -66,12 +74,72 @@ class Demographic {
         return 0;
     }
 
+    /**
+     * sets the total_female and total_male properties on the object
+     */
+    set_gender_totals() {
+        this.total_female = this.data.reduce(
+            (accum,item) => accum + (item.gender.female ? item.gender.female.total : 0),
+            0);
+
+        this.total_male = this.data.reduce(
+            (accum,item) => accum + (item.gender.male ? item.gender.male.total : 0 ),
+            0);
+
+        this.set_total(this.total_female + this.total_male)
+    }
+
+    /**
+     * the percent of the gender counting the totals
+     * @returns {{female: string, male: string}}
+     */
+    get_gender_percentages() {
+        return {
+            female: Math.round(this.total_female/this.total * 100),
+            male: Math.round(this.total_male/this.total * 100 )
+        }
+    }
+
+    get_ages_total() {
+        let total_ages = {};
+        this.data.forEach( country => {
+            Object.keys(country.gender).forEach(_gender => {
+                for (let [key, value] of Object.entries(country.gender[_gender])) {
+                    if (!total_ages[key])
+                        total_ages[key] = value;
+                    else
+                        total_ages[key] += value
+                }
+            })
+        });
+
+        return total_ages;
+    }
+
+    get_ages_total_percentages() {
+
+        let total_age_percentages = {};
+        const ages_total = this.get_ages_total();
+
+        for (let age of Object.keys(ages_total).filter(value => value !== 'total'))
+                total_age_percentages[age] = (ages_total[age]/ages_total['total'] * 100).toFixed(2);
+
+
+        return Object.entries(total_age_percentages).map(([key, value]) => {
+            return { name: key, percentage: value };
+        });
+    }
+
+
 }
 
 /*
 // sample
 let s = new Demographic(data.data.report.data);
-console.log(JSON.stringify(s.data, null, 2));
- */
+console.log(s.total);
+console.log(JSON.stringify(s.get_ages_total_percentages(), null, 2));
+*/
+
+
 
 export default Demographic;
