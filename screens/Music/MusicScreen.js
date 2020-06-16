@@ -15,14 +15,17 @@ const MusicScreen = ({ navigation }) => {
   };
   const styleButtomEnable = {
     color: '#eeeeee',
-    fontSize: 20,
+    fontSize: 16,
     marginRight: 25,
+    fontWeight: 'bold',
     borderColor: '#eeeeee',
-    borderBottomWidth: 1,
+    borderBottomWidth: 3,
+    paddingHorizontal: 15,
+    paddingBottom: 4
   };
   const styleButtomDesable = {
-    color: '#eeeeee',
-    fontSize: 20,
+    color: '#7F8086',
+    fontSize: 16,
     marginRight: 25,
   };
 
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-start',
-
     padding: 20,
+    marginLeft: 20
   },
 });

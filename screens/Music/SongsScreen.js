@@ -19,7 +19,7 @@ const SongsScreen = ({navigation}) => {
   //  console.log({navigation});
   const {artist, isLoading} = useSelector(state => state.artist);
     //console.log('artist.songs en songScreen', artist.songs);
-  const [time1, settime1] = useState('Ultimos 28 dias');
+  const [time1, settime1] = useState('LAST 28 DAYS');
   const time = timeSelected => {
     settime1(timeSelected);
     console.log(timeSelected);
@@ -32,17 +32,17 @@ const SongsScreen = ({navigation}) => {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 4,
+    marginBottom: 4,
   };
   const containerImPar = {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
-    backgroundColor: '#282828',
+    marginTop: 4,
+    marginBottom: 4,
+    backgroundColor: '#222427',
   };
 
   return (
@@ -56,8 +56,8 @@ const SongsScreen = ({navigation}) => {
           alignItems: 'center',
           marginBottom: 30,
         }}>
-        <Text style={{fontSize: 16, color: '#535353'}}>{time1}</Text>
-        <Text style={{fontSize: 16, color: '#535353'}}>STREAMS</Text>
+        <Text style={{fontSize: 11, color: '#7F8086'}}>{time1}</Text>
+        <Text style={{fontSize: 11, color: '#7F8086', marginLeft: -20}}>STREAMS</Text>
       </View>
 
       {isLoading ? (
@@ -93,7 +93,7 @@ const SongsScreen = ({navigation}) => {
                 style={{width: 50, height: 50}}
               />
 
-              <Text style={{fontSize: 15, color: '#eeeeee', marginLeft: 10}}>
+              <Text style={{fontSize: 14, color: '#eeeeee', marginLeft: 10}}>
                 {song.song_name}
               </Text>
             </View>
@@ -104,7 +104,7 @@ const SongsScreen = ({navigation}) => {
                 justifyContent: 'flex-end',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 15, color: '#eeeeee', marginRight: 15}}>
+              <Text style={{fontSize: 14, color: '#eeeeee', marginRight: 15}}>
                 {song.total_plays_number}
               </Text>
               <MaterialCommunityIcons
@@ -116,6 +116,11 @@ const SongsScreen = ({navigation}) => {
           </TouchableOpacity>
         ))
       )}
+      <View style={styles.message}> 
+        <Text style={styles.messageText} >
+          Songs appear here 1 day after they get streamed or saved for the first time
+        </Text>
+      </View>
     </View>
   );
 };
@@ -132,4 +137,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 10,
   },
+  message: {
+    marginTop: 11,
+    marginHorizontal: 70
+  },
+  messageText: {
+    color: '#7F8086',
+    textAlign: 'center',
+    fontSize: 14
+  }
 });

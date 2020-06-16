@@ -1,34 +1,40 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
-import ButtonDropDown from './SubComponents/ButtonDropDown';
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Image } from 'react-native-elements';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import ButtonDropDown from "./SubComponents/ButtonDropDown";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+import { Image } from "react-native-elements";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useSelector } from "react-redux";
 
 const PlaylistScreen = () => {
   const { artist, isLoading } = useSelector((state) => state.artist);
 
-  const [time1, settime1] = useState('Ultimos 28 dias');
+  const [time1, settime1] = useState("Ultimos 28 dias");
   const time = (timeSelected) => {
     settime1(timeSelected);
   };
   const containerPar = {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 4,
+    marginBottom: 4,
   };
   const containerImPar = {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
-    backgroundColor: '#282828',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 4,
+    marginBottom: 4,
+    backgroundColor: '#222427',
   };
   return (
     <View>
@@ -36,29 +42,34 @@ const PlaylistScreen = () => {
       <View
         style={{
           flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
           marginBottom: 30,
-        }}>
-        <Text style={{ fontSize: 16, color: '#535353' }}>{time1}</Text>
-        <Text style={{ fontSize: 16, color: '#535353' }}>STREAMS</Text>
+        }}
+      >
+        <Text style={{fontSize: 11, color: '#7F8086'}}>{time1}</Text>
+        <Text style={{fontSize: 11, color: '#7F8086', marginLeft: -20}}>STREAMS</Text>
       </View>
 
       {isLoading ? (
         <View style={[styles.container3, styles.horizontal]}>
-          <ActivityIndicator size='large' color='#eeeeee' />
+          <ActivityIndicator size="large" color="#eeeeee" />
         </View>
       ) : (
         artist.songs.map((song, index) => (
-          <TouchableOpacity style={index % 2 ? containerPar : containerImPar} key={index}>
+          <TouchableOpacity
+            style={index % 2 ? containerPar : containerImPar}
+            key={index}
+          >
             <View
               style={{
                 flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-              }}>
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
               <Image
                 source={{
                   uri: song.image_url,
@@ -66,28 +77,47 @@ const PlaylistScreen = () => {
                 style={{ width: 50, height: 50 }}
               />
               <View>
-                <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>
+                <Text
+                  style={{ fontSize: 15, color: "#eeeeee", marginLeft: 10 }}
+                >
                   {song.song_name}
                 </Text>
 
-                <Text style={{ fontSize: 15, color: '#eeeeee', marginLeft: 10 }}>{song.album}</Text>
+                <Text
+                  style={{ fontSize: 15, color: "#7F8086", marginLeft: 10 }}
+                >
+                  {song.album}
+                </Text>
               </View>
             </View>
             <View
               style={{
                 flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-              }}>
-              <Text style={{ fontSize: 15, color: '#eeeeee', marginRight: 15 }}>
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 15, color: "#eeeeee", marginRight: 15 }}>
                 {song.total_plays_number}
               </Text>
-              <MaterialCommunityIcons name='chevron-right' color='#535353' size={30} />
+              <MaterialCommunityIcons
+                name="chevron-right"
+                color="#535353"
+                size={30}
+              />
             </View>
           </TouchableOpacity>
         ))
       )}
+      <View style={styles.message}>
+        <Text style={styles.messageText}>
+          Showing 5 of 81 playlist.
+        </Text>
+        <Text style={styles.messageText}>
+        Playlists appear when your music reaches 25 streams on a playlist
+        </Text>
+      </View>
     </View>
   );
 };
@@ -97,23 +127,32 @@ export default PlaylistScreen;
 const styles = StyleSheet.create({
   container2: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginTop: 10,
     marginBottom: 10,
   },
   music: {
-    color: '#eeeeee',
+    color: "#eeeeee",
     fontSize: 20,
   },
   container3: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     padding: 10,
   },
+  message: {
+    marginTop: 11,
+    marginHorizontal: 70,
+  },
+  messageText: {
+    color: "#7F8086",
+    textAlign: "center",
+    fontSize: 14
+  }
 });

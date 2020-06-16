@@ -9,17 +9,17 @@ const CircularChart = (props) => {
   return (
     <View style={styles.container1}>
       <AnimatedCircularProgress
-        size={200}
-        width={10}
+        size={250}
+        width={15}
         fill={parseInt(gender_data.male, 10)}
-        tintColor="#00e0ff"
-        backgroundColor="#3d5875">
+        tintColor="#464D87"
+        backgroundColor="#49759C">
         {fill => (
           <View>
-            <Text style={{color: '#00e0ff', fontSize: 20}}>
+            <Text style={{color: '#49759C', fontSize: 22, fontWeight: 'bold', marginLeft: 10}}>
               {gender_data.male}% {names[0]}
             </Text>
-            <Text style={{color: '#3d5875', fontSize: 20}}>
+            <Text style={{color: '#464D87', fontSize: 22 ,fontWeight: 'bold', marginLeft: 1}}>
               {gender_data.female}% {names[1]}
             </Text>
           </View>
