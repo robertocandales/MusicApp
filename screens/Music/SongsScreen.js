@@ -18,7 +18,7 @@ const SongsScreen = ({navigation}) => {
 
   //  console.log({navigation});
   const {artist, isLoading} = useSelector(state => state.artist);
-  //  console.log('artist en song', artist);
+    //console.log('artist.songs en songScreen', artist.songs);
   const [time1, settime1] = useState('Ultimos 28 dias');
   const time = timeSelected => {
     settime1(timeSelected);

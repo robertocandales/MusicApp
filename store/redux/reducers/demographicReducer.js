@@ -11,11 +11,11 @@ const initialState = {
 export default function itemsReducer(state = initialState, action) {
   switch (action.type) {
     case DEMOGRAPHIC_FETCHING:
-      return {...state, isLoading: true};
+      return { ...state, isLoading: true };
     case DEMOGRAPHIC_FETCHED:
-      return {...state, isLoading: false};
+      return { ...state, isLoading: false };
     case DEMOGRAPHIC_FETCH_FAILED:
-      return {...state, isLoading: false, error: action.payload};
+      return { ...state, isLoading: false, error: action.payload };
 
     default:
       return state;

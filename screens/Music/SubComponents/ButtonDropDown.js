@@ -17,39 +17,44 @@ const ButtonDropDown = (props) => {
   return (
     <View>
       <View style={styles.container}>
-        <Icon
+        {/*<Icon
           name='sort-down'
           size={25}
           color='#eeeeee'
           style={[{ right: 18, top: 8, position: 'absolute', opacity: 0.5 }]}
-        />
-        {/*<Picker
-          selectedValue={selectedValue}
-          style={styles.picker}
-          //  activeItemTextStyle={[{fontSize: 28, fontWeight: 'bold'}]}
-          onValueChange={time}
-          itemStyle={[{ color: '#eeeeee', backgroundColor: '#403d3f' }]}
-          itemTextStyle={[{ color: '#eeeeee' }]}>
-          {options.map((item, index) => {
-            return <Picker.Item label={item} value={item} key={index} />;
-          })}
-        </Picker>*/}
-        <RNPickerSelect
-          selectedValue={selectedValue}
-          style={{ ...pickerSelectStyles }}
-          onValueChange={time}
-          placeholder={{
-            label: 'Select time...',
-            value: null,
-          }}
-          itemStyle={[{ color: '#eeeeee', backgroundColor: '#403d3f' }]}
-          itemTextStyle={[{ color: '#eeeeee' }]}
-          items={[
-            { label: 'Ultimos 28 dias', value: 'Ultimos 28 dias' },
-            { label: 'Last Week', value: 'Last Week' },
-            { label: 'Last two Week', value: 'Last  two Week' },
-          ]}
-        />
+        />*/}
+        {Platform.OS === 'ios' ? (
+          <RNPickerSelect
+            selectedValue={selectedValue}
+            style={{
+              ...pickerSelectStyles,
+            }}
+            onValueChange={time}
+            placeholder={{
+              label: 'Select time...',
+              value: null,
+            }}
+            itemStyle={[{ color: '#eeeeee', backgroundColor: '#403d3f' }]}
+            itemTextStyle={[{ color: '#eeeeee' }]}
+            items={[
+              { label: 'Ultimos 28 dias', value: 'Ultimos 28 dias' },
+              { label: 'Last Week', value: 'Last Week' },
+              { label: 'Last two Week', value: 'Last  two Week' },
+            ]}
+          />
+        ) : (
+          <Picker
+            selectedValue={selectedValue}
+            style={styles.picker}
+            activeItemTextStyle={[{ fontSize: 28, fontWeight: 'bold' }]}
+            onValueChange={time}
+            itemStyle={{ color: '#eeeeee', backgroundColor: '#403d3f' }}
+            itemTextStyle={[{ color: '#eeeeee' }]}>
+            {options.map((item, index) => {
+              return <Picker.Item label={item} value={item} key={index} color='#403d3f' />;
+            })}
+          </Picker>
+        )}
       </View>
     </View>
   );
@@ -76,6 +81,13 @@ const styles = StyleSheet.create({
     opacity: 0.5,
     fontSize: 20,
   },
+  pickerIcon: {
+    color: '#eeeeee',
+    position: 'absolute',
+    bottom: 15,
+    right: 10,
+    fontSize: 20,
+  },
 });
 
 const pickerSelectStyles = StyleSheet.create({
@@ -87,6 +99,6 @@ const pickerSelectStyles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 4,
     backgroundColor: '#403d3f',
-    color: 'black',
+    color: '#eeeeee',
   },
 });

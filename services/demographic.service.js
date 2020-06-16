@@ -8,6 +8,7 @@ const URL = 'http://ec2-52-55-160-105.compute-1.amazonaws.com:3300/api/'; // tod
  * @param {*} options
  */
 function get_demographics(options) {
+  
   const request_options = {
     method: 'get',
     url: URL + 'demographic',
