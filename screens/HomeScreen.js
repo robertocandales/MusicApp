@@ -11,8 +11,8 @@ import {
   
 } from "react-native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import { Avatar, Image } from "react-native-elements";
+import MainLogin from "./login/LoginMain";
+ import { Avatar, Image } from "react-native-elements";
 import { get_songs, set_artist } from "../store/redux/actions/artist.actions";
 import Artist from "../models/Artist";
 
@@ -28,6 +28,7 @@ const HomeScreen = () => {
   }, []);
 
   const seeSong = () => {};
+  const {user} = useSelector(state => state.user);
 
   return (
     <ScrollView style={styles.main}>
@@ -164,7 +165,8 @@ const HomeScreen = () => {
         <Text style={styles.topSong}>New for you</Text>
       </View>
     </ScrollView>
-  );
+    
+  )
 };
 
 export default HomeScreen;

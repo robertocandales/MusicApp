@@ -43,7 +43,7 @@ function parse_data(data) {
         value.total_events,
         null,
         value.artists,
-        'https://agenciaajn.com/new/wp-content/uploads/sia.jpg',
+        'https://firebasestorage.googleapis.com/v0/b/claromusica-b3d26.appspot.com/o/place_holder_playlists.png?alt=media&token=099e7bd0-36e8-461c-b8f4-f460b28a77d7',
       ),
   );
 }
