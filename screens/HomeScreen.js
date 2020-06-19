@@ -13,11 +13,10 @@ import { Avatar, Image } from 'react-native-elements';
 import { get_songs } from '../store/redux/actions/artist.actions';
 
 const HomeScreen = () => {
+  const avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
   const dispatch = useDispatch();
   const { artist, isLoading } = useSelector((state) => state.artist);
   const songs = artist.songs;
-
-    
   React.useEffect(() => {
     dispatch(get_songs({ user: artist.name, top: 5 }));
   }, []);
@@ -30,7 +29,7 @@ const HomeScreen = () => {
         <Avatar
           rounded
           source={{
-            uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+            uri: avatar,
           }}
           containerStyle={{
             alignSelf: 'flex-end',

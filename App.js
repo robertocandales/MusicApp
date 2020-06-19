@@ -1,29 +1,58 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect } from 'react';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from "react";
+import { Provider } from "react-redux";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import HomeScreen from './screens/HomeScreen';
-import MusicScreen from './screens/Music/MusicScreen';
-import AudienceScreen from './screens/Audience/AudienceScreen';
-import AccountScreen from './screens/AccountScreen';
-import ShowPerfil from './screens/Music/SubComponents/ShowPerfil';
-import { createStackNavigator } from '@react-navigation/stack';
+import MusicScreen from "./screens/Music/MusicScreen";
+import Account from "./screens/Login/Account";
+import Login from "./screens/Login/Login";
+import SignUp from "./screens/SignUp/SignUp";
 
-import store from './store';
+import ShowPerfil from "./screens/Music/SubComponents/ShowPerfil";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import store from "./store";
+import TabNavigation from "./components/TabNavigation";
+
+import { decode, encode } from "base-64";
+
+if (!global.btoa) global.btoa = encode;
+if (!global.atob) global.atob = decode;
 
 const Stack = createStackNavigator();
 const createHomeStack = () => (
   <Stack.Navigator
-    initialRouteName='MusicScreen'
+    initialRouteName="MusicScreen"
     screenOptions={{
       headerShown: false,
-    }}>
-    <Stack.Screen name='Music' component={MusicScreen} />
-    <Stack.Screen name='ShowPerfil' component={ShowPerfil} />
+    }}
+  >
+    <Stack.Screen name="Music" component={MusicScreen} />
+    <Stack.Screen name="ShowPerfil" component={ShowPerfil} />
+  </Stack.Navigator>
+);
+
+const tabNavigation = () => <TabNavigation />;
+
+const createLoginStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name="account"
+      component={Account}
+    />
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name="login"
+      component={Login}
+    />
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name="signup"
+      component={SignUp}
+    />
   </Stack.Navigator>
 );
 
@@ -33,52 +62,18 @@ const App: () => React$Node = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Tab.Navigator
-          initialRouteName='Home'
-          activeColor='#eeeeee'
-          inactiveColor='grey'
-          barStyle={{ backgroundColor: '#282828' }}>
-          <Tab.Screen
-            name='Home'
-            component={HomeScreen}
-            options={{
-              tabBarLabel: 'Home',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name='home' color={color} size={26} />
-              ),
-            }}
+        <Stack.Navigator>
+          <Stack.Screen
+            name="account"
+            options={{ headerShown: false }}
+            component={createLoginStack}
           />
-          <Tab.Screen
-            name='Music'
-            component={createHomeStack}
-            options={{
-              tabBarLabel: 'Music',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name='music' color={color} size={26} />
-              ),
-            }}
+          <Stack.Screen
+            name="tabNavigator"
+            options={{ headerShown: false }}
+            component={tabNavigation}
           />
-          <Tab.Screen
-            name='Audience'
-            component={AudienceScreen}
-            options={{
-              tabBarLabel: 'Audience',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name='account-supervisor' color={color} size={26} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name='Account'
-            component={AccountScreen}
-            options={{
-              tabBarLabel: 'Account',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name='account' color={color} size={26} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
+        </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
